@@ -12,7 +12,6 @@ int  main(){
 
 	if(pid==0){
 	//child process
-	  
 	   printf("ChildProcess: myId=%d parentId=%d\n",getpid(),getppid());
 	   printf("ChildProcess: press any key to exit");
 	     
@@ -24,10 +23,8 @@ int  main(){
 
 	}else{
 	//parent process
-	
-	      	printf("ParentProcess: waiting: myId=%d parentId=%d\n",getpid(),getppid());
+	  printf("ParentProcess: waiting: myId=%d parentId=%d\n",getpid(),getppid());
 
-	     printf("ParentProcess: waiting for child to exit");
 	     pid_t child_id= wait(&status);
 
 	      if (WIFEXITED(status)) {
@@ -36,7 +33,6 @@ int  main(){
                 if (WIFSIGNALED(status)) {
                         printf("The process ended with kill -%d.\\n", WTERMSIG(status));
                 }
-	    // printf("child with id=%d exitted with status=%d\n",child_id,status);
 
 
 	}

@@ -1,0 +1,8 @@
+
+
+to list the running process
+
+  ps -a
+
+to kill a running process
+  kill PID // PID = the process ID from ps command

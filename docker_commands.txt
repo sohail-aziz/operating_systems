@@ -1,0 +1,67 @@
+
+Dockerfile
+
+FROM gcc:4.9
+RUN mkdir -p /app
+COPY . /app
+WORKDIR /app
+RUN gcc -o helloworld helloworld.c
+RUN chmod 777 helloworld
+CMD ["./helloworld"]
+
+
+
+Check docker running status
+sudo systemctl status docker //checks if docker is running or not 
+
+Start docker 
+sudo systemctl start docker //starts docker
+Or 
+dockerd //world start and show logs in forgraound
+Stop docker
+sudo systemctl stop docker
+
+End all docker containers
+sudo docker kill $(docker ps -q) 
+Remove docker lock file
+sudo rm -f /var/run/docker /var/run/docker.*
+
+Remove all docker images
+docker rmi $(docker images -q)
+
+Stop and remove all the containers
+* Stop all running containers: docker stop $(docker ps -a -q)
+* Delete all stopped containers: docker rm $(docker ps -a -q)
+ 
+Remove all images at once
+docker rmi $(docker images -q)
+
+List all the docker images
+docker images -a or docker images.
+
+List running containers
+docker ps -a
+
+Stop a running container
+docker stop ccfac1f88d1b // container id 
+
+
+Docker build -t helloworld:v2 .
+
+Docker images  //list down images
+
+Docker ps -a  //shows running docker images
+
+Docker pull  username/reposname // pull docker repo
+
+Docker run image:tag //runs docker image
+
+docker tag helloworld:v1 azizsohail/hello-world:v1 //create a tag
+
+docker login -u azizsohail. //login to your account using access token
+
+ docker push azizsohail/hello-world:v1
+
+docker rmi azizsohail/hello-world //remove docker image
+
+

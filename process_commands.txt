@@ -1,8 +1,38 @@
 
 
-to list the running process
+#to list the running process
+ ps -a
 
-  ps -a
-
-to kill a running process
+#to kill a running process
   kill PID // PID = the process ID from ps command
+
+# to see the process status, 1234 is the process id.
+cat /proc/1234/status
+#or 
+ps -l 1234
+
+# to see the dynamic realtime view of the running process and their states
+top
+#and
+htop
+
+#commone process states
+
+Here are some common process states you might see:
+
+R (Running or Runnable): The process is either running on a CPU or waiting to run.
+S (Interruptible Sleep): The process is waiting for an event to complete or for a resource to become available.
+D (Uninterruptible Sleep): The process is waiting for I/O (input/output) to complete and cannot be interrupted.
+T (Stopped): The process has been stopped, usually by receiving a signal.
+Z (Zombie): The process has completed execution, but its parent has not yet read its exit status, leaving it in a "zombie" state.
+
+#to see the status of a particular process
+top -p PID
+
+
+
+
+
+
+
+

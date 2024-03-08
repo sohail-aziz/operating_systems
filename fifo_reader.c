@@ -20,8 +20,8 @@ read(fd, buffer, sizeof(buffer)); // Read data from the FIFO into buffer
 printf("myfifo: Received: %s\n", buffer);
 close(fd); // Close the FIFO
 
- //unlink 
- 
+ //unlink, this will delete the file descriptor myfifo 
  unlink(fifoPath);
+
 
 }

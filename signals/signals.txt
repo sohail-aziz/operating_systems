@@ -1,0 +1,60 @@
+There are several types of signals in Linux, including but not limited to:
+
+SIGINT: Interrupt signal, typically sent when the user presses Ctrl+C.
+SIGKILL: Kill signal, used to immediately terminate a process.
+SIGTERM: Termination signal, used to request a process to terminate gracefully.
+SIGSEGV: Segmentation fault signal, sent when a process attempts to access a restricted area of memory.
+SIGCHLD: Sent to a parent process when one of its child processes terminates or stops.
+Sending Signals
+Signals can be sent in various ways:
+
+From the terminal: Using commands like kill, pkill, or killall. For example, to send SIGTERM to a process with a specific PID, you would use kill -SIGTERM PID.
+
+Within a program: By using functions like kill() for sending signals to a process, or raise() for sending a signal to the current process.
+
+Automatically by the system: When certain events occur, like dividing by zero or accessing invalid memory.
+
+
+TO see the list of supported signals:
+
+$ kill -l
+
+ 1) SIGHUP	 2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
+ 6) SIGABRT	 7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
+11) SIGSEGV	12) SIGUSR2	13) SIGPIPE	14) SIGALRM	15) SIGTERM
+16) SIGSTKFLT	17) SIGCHLD	18) SIGCONT	19) SIGSTOP	20) SIGTSTP
+21) SIGTTIN	22) SIGTTOU	23) SIGURG	24) SIGXCPU	25) SIGXFSZ
+26) SIGVTALRM	27) SIGPROF	28) SIGWINCH	29) SIGIO	30) SIGPWR
+31) SIGSYS	34) SIGRTMIN	35) SIGRTMIN+1	36) SIGRTMIN+2	37) SIGRTMIN+3
+38) SIGRTMIN+4	39) SIGRTMIN+5	40) SIGRTMIN+6	41) SIGRTMIN+7	42) SIGRTMIN+8
+43) SIGRTMIN+9	44) SIGRTMIN+10	45) SIGRTMIN+11	46) SIGRTMIN+12	47) SIGRTMIN+13
+48) SIGRTMIN+14	49) SIGRTMIN+15	50) SIGRTMAX-14	51) SIGRTMAX-13	52) SIGRTMAX-12
+53) SIGRTMAX-11	54) SIGRTMAX-10	55) SIGRTMAX-9	56) SIGRTMAX-8	57) SIGRTMAX-7
+58) SIGRTMAX-6	59) SIGRTMAX-5	60) SIGRTMAX-4	61) SIGRTMAX-3	62) SIGRTMAX-2
+63) SIGRTMAX-1	64) SIGRTMAX
+
+
+SPECIAL SIGNALS
+
+SIGKILL and SIGSTOP are two special signals in UNIX and Linux systems that provide the operating system with a means to control the execution of processes in a non-negotiable manner. Both signals have unique characteristics that distinguish them from other signals in how they affect processes.
+
+SIGKILL (Signal Kill)
+Number: Often 9
+Description: SIGKILL is used to immediately terminate a process. The signal cannot be caught, ignored, or handled by a custom handler, which means that the process cannot clean up after itself before terminating.
+Usage: It is typically used as a last resort when a process is unresponsive and cannot be terminated gracefully using SIGTERM (signal number 15), which allows a process to intercept the signal and perform cleanup operations before exiting.
+Example: To send SIGKILL to a process with a PID of 1234, you would use the command kill -9 1234 in the terminal.
+
+SIGSTOP (Signal Stop)
+Number: Often 19 or 17, depending on the system
+Description: SIGSTOP is used to pause a process's execution. Like SIGKILL, this signal cannot be caught, ignored, or handled, ensuring that it always succeeds in stopping the process.
+Usage: SIGSTOP is useful for temporarily halting a process without terminating it, allowing for the possibility to resume its execution later with the SIGCONT (signal continue) signal. This can be particularly useful for debugging or managing system resources.
+Example: To send SIGSTOP to a process with a PID of 1234, you would use the command 
+kill -STOP 1234 
+
+in the terminal.
+
+The inability of processes to intercept or ignore SIGKILL and SIGSTOP signals is by design, ensuring that system administrators have a reliable way to terminate or suspend any process without exception. This is crucial for maintaining control over system resources and managing processes that become unresponsive or behave erratically.
+
+It's important to use SIGKILL judiciously since it does not allow the process to release resources or clean up temporary files, which might lead to data corruption or resource leaks. Whenever possible, it's better to attempt a graceful shutdown of a process using signals like 
+
+SIGTERM, resorting to SIGKILL only when necessary.

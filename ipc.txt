@@ -1,0 +1,11 @@
+*List Shared Memory Segments: 
+
+
+ipcs -m 
+
+this displays all active shared memory segments, showing details like the IPC key, segment ID, owner, permissions, size, and number of attached processes.
+
+*Remove a Shared Memory Segment: 
+ 
+ ipcrm -m <shmid>
+ 

@@ -1,0 +1,42 @@
+In the POSIX Threads (Pthreads) library in Linux and other UNIX-like systems, thread attributes are used to specify certain behaviors and properties of threads at the time of their creation. These attributes are managed using a data type called `pthread_attr_t`. By setting different attributes in this structure, you can control aspects such as stack size, scheduling policy, and more.
+
+Here are some of the key attributes you can set for Pthreads:
+
+### 1. Detach State
+- **Purpose**: Determines whether the thread is created in a detached state.
+- **Functions**: `pthread_attr_setdetachstate()` and `pthread_attr_getdetachstate()`
+- **Options**:
+  - `PTHREAD_CREATE_DETACHED`: The thread is created in a detached state, meaning that it releases its resources back to the system upon finishing, and it cannot be joined.
+  - `PTHREAD_CREATE_JOINABLE`: The thread is created in a joinable state, meaning another thread can call `pthread_join()` to wait for the thread to complete and collect its exit status.
+
+### 2. Stack Size
+- **Purpose**: Sets the size of the stack that should be allocated for the thread.
+- **Functions**: `pthread_attr_setstacksize()` and `pthread_attr_getstacksize()`
+
+### 3. Scheduling Policy
+- **Purpose**: Determines the scheduling policy of the thread (e.g., FIFO, Round Robin).
+- **Functions**: `pthread_attr_setschedpolicy()` and `pthread_attr_getschedpolicy()`
+- **Options**:
+  - `SCHED_FIFO`: First-In, First-Out scheduling
+  - `SCHED_RR`: Round-Robin scheduling
+  - `SCHED_OTHER`: Default Linux time-sharing scheduling
+
+### 4. Scheduling Priority
+- **Purpose**: Sets the scheduling priority of the thread within its scheduling policy.
+- **Functions**: `pthread_attr_setschedparam()` and `pthread_attr_getschedparam()`
+
+### 5. Inherit Scheduler
+- **Purpose**: Specifies whether the thread should inherit the scheduling properties of the calling thread or use explicit attributes set through the `pthread_attr_t`.
+- **Functions**: `pthread_attr_setinheritsched()` and `pthread_attr_getinheritsched()`
+- **Options**:
+  - `PTHREAD_INHERIT_SCHED`: Inherit the scheduler settings of the parent (creating) thread.
+  - `PTHREAD_EXPLICIT_SCHED`: Use the explicit scheduler settings provided in the attributes.
+
+### 6. Scope
+- **Purpose**: Determines whether the thread competes for CPU time with threads from all processes (`PTHREAD_SCOPE_SYSTEM`) or only with threads within the same process (`PTHREAD_SCOPE_PROCESS`).
+- **Functions**: `pthread_attr_setscope()` and `pthread_attr_getscope()`
+- **Options**:
+  - `PTHREAD_SCOPE_SYSTEM`: Competes with all threads in all processes.
+  - `PTHREAD_SCOPE_PROCESS`: Competes only with threads within the same process.
+
+
